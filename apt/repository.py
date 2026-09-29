@@ -123,6 +123,7 @@ def fields(text):
 def validate_deb(path, package, version, architecture):
     regular(path, MAX_PACKAGE_BYTES)
     control = None
+    keyring = None
     required = ({'usr/lib/jambor-launcher/Jambor', 'usr/lib/jambor-launcher/Jambor.Updater',
                  'usr/lib/jambor-launcher/release-version.txt', 'usr/bin/jambor',
                  'usr/share/applications/dev.jojo.jambor.desktop',
@@ -164,6 +165,10 @@ def validate_deb(path, package, version, architecture):
                             raise ValueError('Unexpected installed path')
                         if option == '--fsys-tarfile':
                             found.add(name)
+                            if name == 'usr/share/keyrings/jambor-archive-keyring.gpg':
+                                if member.size > MAX_METADATA_BYTES:
+                                    raise ValueError('Keyring exceeds metadata bound')
+                                keyring = archive.extractfile(member).read()
                             if name == 'usr/bin/jambor' and not member.mode & 0o111:
                                 raise ValueError('Bootstrap must be executable')
                             if name.endswith('/release-version.txt'):
@@ -194,6 +199,7 @@ def validate_deb(path, package, version, architecture):
                 raise ValueError('Unreviewed launcher dependencies')
             if any(key in control for key in ('Pre-Depends', 'Conflicts', 'Breaks', 'Replaces', 'Provides', 'Essential')):
                 raise ValueError('Unexpected package relationship')
+    return keyring
 
 
 def keyring_package(public_key, version, destination):
@@ -251,7 +257,7 @@ def verify(inrelease, public_key, fingerprint, now=None, allow_expired=False):
     return release
 
 
-def generate(candidate_path, artifacts, public_key, keyring_version, generator_commit, output, now):
+def generate(candidate_path, artifacts, public_key, keyring_version, generator_commit, output, now, keyring=None):
     if not checked_match(COMMIT, generator_commit) or now.tzinfo is None:
         raise ValueError('Generator revision and timezone are required')
     candidate = read_json(candidate_path)
@@ -264,7 +270,13 @@ def generate(candidate_path, artifacts, public_key, keyring_version, generator_c
     keypool = output / 'pool/main/j/jambor-archive-keyring'
     keypool.mkdir(parents=True)
     keydeb = keypool / f'jambor-archive-keyring_{keyring_version}_all.deb'
-    keyring_package(public_key, keyring_version, keydeb)
+    if keyring is None:
+        keyring_package(public_key, keyring_version, keydeb)
+    else:
+        contents = validate_deb(keyring, 'jambor-archive-keyring', keyring_version, 'all')
+        if contents != run('gpg', '--batch', '--dearmor', data=public_key.read_bytes()):
+            raise ValueError('Published keyring does not contain the reviewed public certificate')
+        shutil.copyfile(keyring, keydeb)
     keys = output / 'keys'
     keys.mkdir()
     shutil.copyfile(public_key, keys / 'jambor-archive-keyring.asc')

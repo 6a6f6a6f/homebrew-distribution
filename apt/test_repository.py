@@ -162,6 +162,11 @@ class RepositoryTests(unittest.TestCase):
             files = lambda folder: {str(p.relative_to(folder)): repo.digest(p)
                                     for p in folder.rglob('*') if p.is_file()}
             self.assertEqual(files(root / 'a'), files(root / 'b'))
+            keyring = root / 'a/pool/main/j/jambor-archive-keyring/jambor-archive-keyring_1.0.0_all.deb'
+            with patch.object(repo, 'keyring_package', side_effect=AssertionError('Do not rebuild keyrings')):
+                repo.generate(self.candidate, self.artifacts, self.public, '1.0.0', 'c' * 40,
+                              root / 'reused', now, keyring=keyring)
+            self.assertEqual(files(root / 'a'), files(root / 'reused'))
             candidate = repo.read_json(self.candidate)
             candidate['installers']['linux-arm64']['sha256'] = '0' * 64
             with self.assertRaisesRegex(ValueError, 'bytes changed'):
