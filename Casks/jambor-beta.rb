@@ -8,7 +8,7 @@ cask "jambor-beta" do
   homepage "https://jojo.dev.br/"
 
   depends_on arch: :arm64
-  depends_on macos: ">= 14.0"
+  depends_on macos: :sonoma
   conflicts_with cask: "jambor"
   auto_updates true
 
