@@ -1,4 +1,5 @@
 cask "jambor-beta" do
+  disable! date: "2026-09-28", because: "withdrawn due to bundled development documentation; see Jambor issue #17"
   version "0.2.0"
   sha256 "acf40933f1c79a1be05677b1319847d7a04453f6ec1370069e4834e5eeea5055"
 
