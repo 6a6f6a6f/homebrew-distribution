@@ -1,9 +1,8 @@
 cask "jambor-beta" do
-  disable! date: "2026-09-28", because: "withdrawn due to bundled development documentation; see Jambor issue #17"
-  version "0.2.0"
-  sha256 "acf40933f1c79a1be05677b1319847d7a04453f6ec1370069e4834e5eeea5055"
+  version "0.2.1"
+  sha256 "10066f7f3d07ec07f8a1bc711796656991c50b037bd20d45569a34becde0c822"
 
-  url "https://assets.jojo.dev.br/jambor/launcher/installers/beta/0.2.0/a11a435af5a9134b63c63abfcb7ffc247a1bda5f/jambor-0.2.0-a11a435af5a9134b63c63abfcb7ffc247a1bda5f-osx-arm64.dmg"
+  url "https://assets.jojo.dev.br/jambor/launcher/installers/beta/0.2.1/3faa07acc3df5a7186f51495e25937e650995a54/jambor-0.2.1-3faa07acc3df5a7186f51495e25937e650995a54-osx-arm64.dmg"
   name "Jambor Beta"
   desc "Game launcher"
   homepage "https://jojo.dev.br/"

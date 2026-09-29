@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "channel": "beta",
+  "version": "0.2.1",
+  "commit": "3faa07acc3df5a7186f51495e25937e650995a54",
+  "license": "Proprietary",
+  "installers": {
+    "osx-arm64": {
+      "file": "jambor-0.2.1-3faa07acc3df5a7186f51495e25937e650995a54-osx-arm64.dmg",
+      "installerType": "dmg",
+      "minimumOs": "14.0",
+      "sha256": "10066f7f3d07ec07f8a1bc711796656991c50b037bd20d45569a34becde0c822",
+      "signing": "ad-hoc",
+      "size": 9203919,
+      "url": "https://assets.jojo.dev.br/jambor/launcher/installers/beta/0.2.1/3faa07acc3df5a7186f51495e25937e650995a54/jambor-0.2.1-3faa07acc3df5a7186f51495e25937e650995a54-osx-arm64.dmg"
+    },
+    "win-arm64": {
+      "file": "jambor-0.2.1-3faa07acc3df5a7186f51495e25937e650995a54-win-arm64.exe",
+      "installerType": "inno",
+      "minimumOs": "10.0.17763.0",
+      "sha256": "5cb2e4137a5402a2d5c2718c1a9f5857143ae9641c1d91c4029f8c934ce3446c",
+      "signing": "unsigned",
+      "size": 7668138,
+      "url": "https://assets.jojo.dev.br/jambor/launcher/installers/beta/0.2.1/3faa07acc3df5a7186f51495e25937e650995a54/jambor-0.2.1-3faa07acc3df5a7186f51495e25937e650995a54-win-arm64.exe"
+    },
+    "win-x64": {
+      "file": "jambor-0.2.1-3faa07acc3df5a7186f51495e25937e650995a54-win-x64.exe",
+      "installerType": "inno",
+      "minimumOs": "10.0.17763.0",
+      "sha256": "86acf3979e49b15be40f4ee6aee1c83ab9b71ed06bcce21fbfe842febf432699",
+      "signing": "unsigned",
+      "size": 8013146,
+      "url": "https://assets.jojo.dev.br/jambor/launcher/installers/beta/0.2.1/3faa07acc3df5a7186f51495e25937e650995a54/jambor-0.2.1-3faa07acc3df5a7186f51495e25937e650995a54-win-x64.exe"
+    }
+  },
+  "beta": true,
+  "automaticUpdates": true,
+  "nativeAcceptance": "pending"
+}
