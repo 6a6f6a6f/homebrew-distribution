@@ -1,0 +1,21 @@
+name: APT archive checks
+
+on:
+  push:
+    paths: ['apt/**', '.github/workflows/apt.yml']
+  pull_request:
+    paths: ['apt/**', '.github/workflows/apt.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  archive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - run: sudo apt-get update && sudo apt-get --no-remove install -y apt-utils gnupg
+      - run: python3 -m unittest discover -s apt -v

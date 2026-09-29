@@ -1,5 +1,19 @@
 # Jambor distribution
 
+## Ubuntu APT archive
+
+`apt/repository.py` generates the Ubuntu 26.04 beta archive for AMD64 and ARM64
+from reviewed launcher `.deb` files. It uses Python, `dpkg-deb`, `apt-ftparchive`
+and GnuPG; it does not rebuild application installers. Binary packages/indexes
+belong on R2, not in this repository. `apt/keys/` contains public keys only.
+
+Run `python3 -m unittest discover -s apt -v` on Ubuntu with `apt-utils` and `gnupg`.
+Tests use disposable keys and isolated APT lists; they do not install fixtures.
+Jambor pins this generator's exact commit and performs protected publication.
+See [APT operations](https://github.com/6a6f6a6f/jambor/blob/main/docs/apt-repository.md)
+for enrollment, ownership, rotation, renewal and acceptance. Public APT availability
+remains pending until the release acceptance matrix is recorded.
+
 Homebrew casks and WinGet manifests for Jambor. Binary artifacts are hosted on
 https://assets.jojo.dev.br; installers and game assets are not stored in Git.
 
