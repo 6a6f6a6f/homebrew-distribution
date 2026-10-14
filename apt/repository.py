@@ -13,7 +13,7 @@ import subprocess
 import tarfile
 import tempfile
 
-SUITE = 'ubuntu-26.04-beta'
+SUITE = 'ubuntu-26.04'
 ORIGIN = 'Jambor'
 BASE = 'https://assets.jojo.dev.br'
 ARCHITECTURES = {'linux-x64': 'amd64', 'linux-arm64': 'arm64'}
@@ -82,7 +82,7 @@ def checked_match(pattern, value):
 
 
 def validate_candidate(candidate, artifacts):
-    if (candidate.get('schemaVersion') != 1 or candidate.get('channel') != 'beta'
+    if (candidate.get('schemaVersion') != 1 or 'channel' in candidate
             or not checked_match(VERSION, candidate.get('version'))
             or any(not checked_match(COMMIT, candidate.get(key)) for key in ('commit', 'coreCommit'))
             or set(candidate.get('installers', {})) != set(ARCHITECTURES)):
@@ -91,7 +91,7 @@ def validate_candidate(candidate, artifacts):
     for rid, arch in ARCHITECTURES.items():
         row = candidate['installers'][rid]
         filename = f'jambor-launcher_{candidate["version"]}_{arch}.deb'
-        expected = f'{BASE}/jambor/launcher/beta/{candidate["version"]}/{filename}'
+        expected = f'{BASE}/jambor/launcher/{candidate["version"]}/{filename}'
         if (set(row) != {'url', 'size', 'sha256'} or row['url'] != expected
                 or type(row['size']) is not int or not 0 < row['size'] <= MAX_PACKAGE_BYTES
                 or not checked_match(SHA256, row['sha256'])):
@@ -300,7 +300,7 @@ def generate(candidate_path, artifacts, public_key, keyring_version, generator_c
             by_hash = index / 'by-hash/SHA256' / digest(path)
             by_hash.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(path, by_hash)
-    options = {'Origin': ORIGIN, 'Label': 'Jambor Beta', 'Suite': SUITE, 'Codename': SUITE,
+    options = {'Origin': ORIGIN, 'Label': 'Jambor', 'Suite': SUITE, 'Codename': SUITE,
                'Architectures': 'amd64 arm64', 'Components': 'main', 'Acquire-By-Hash': 'yes',
                'Date': email.utils.format_datetime(now, usegmt=True)}
     arguments = [argument for key, value in options.items()

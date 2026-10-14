@@ -36,12 +36,12 @@ class RepositoryTests(unittest.TestCase):
         cls.public.write_bytes(repo.run('gpg', '--armor', '--export', cls.fingerprint))
         cls.artifacts = cls.root / 'artifacts'
         cls.artifacts.mkdir()
-        candidate = dict(schemaVersion=1, channel='beta', version='1.0.0', commit='a' * 40,
+        candidate = dict(schemaVersion=1, version='1.0.0', commit='a' * 40,
                          coreCommit='b' * 40, installers={})
         for rid, arch in repo.ARCHITECTURES.items():
             package = cls.make_deb(arch)
             candidate['installers'][rid] = dict(
-                url=f'{repo.BASE}/jambor/launcher/beta/1.0.0/{package.name}',
+                url=f'{repo.BASE}/jambor/launcher/1.0.0/{package.name}',
                 size=package.stat().st_size, sha256=repo.digest(package))
         cls.candidate = cls.root / 'candidate.json'
         repo.write_json(cls.candidate, candidate)
@@ -115,7 +115,7 @@ class RepositoryTests(unittest.TestCase):
             self.assertIn('Hash Sum mismatch', download.stdout + download.stderr)
             package.write_bytes(original_package)
             original = inrelease.read_bytes()
-            inrelease.write_bytes(original.replace(b'Jambor Beta', b'Jambor Evil'))
+            inrelease.write_bytes(original.replace(b'Label: Jambor', b'Label: Jambor Evil'))
             self.apt(root / 'tampered-signature', output, False)
             inrelease.write_bytes(original)
             for path in (output / 'dists').rglob('Packages*'):
