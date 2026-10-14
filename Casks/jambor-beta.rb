@@ -1,8 +1,8 @@
 cask "jambor-beta" do
-  version "0.3.0"
-  sha256 "b33687708bc3e0b5fb890695535bf72e3589a2813faf9478f6207855290e2fa7"
+  version "0.4.1"
+  sha256 "0ff4cac9adc4ad1a7e8ea1f2b1531fcbca7bf2676ca383efd618a2879341d2f0"
 
-  url "https://assets.jojo.dev.br/jambor/launcher/installers/beta/0.3.0/b9bda4d1cb06b3bd08744ee3a8ec943756730540/jambor-0.3.0-b9bda4d1cb06b3bd08744ee3a8ec943756730540-osx-arm64.dmg"
+  url "https://assets.jojo.dev.br/jambor/launcher/installers/beta/0.4.1/c63cda48ec858d28a186dd9fa5aaa00d67f8d9ed/jambor-0.4.1-c63cda48ec858d28a186dd9fa5aaa00d67f8d9ed-osx-arm64.dmg"
   name "Jambor Beta"
   desc "Game launcher"
   homepage "https://jojo.dev.br/"

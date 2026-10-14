@@ -1,0 +1,15 @@
+PackageIdentifier: Jojo.Jambor.Beta
+PackageVersion: 0.4.1
+InstallerType: inno
+Scope: user
+MinimumOSVersion: 10.0.17763.0
+UpgradeBehavior: install
+Installers:
+  - Architecture: arm64
+    InstallerUrl: https://assets.jojo.dev.br/jambor/launcher/installers/beta/0.4.1/c63cda48ec858d28a186dd9fa5aaa00d67f8d9ed/jambor-0.4.1-c63cda48ec858d28a186dd9fa5aaa00d67f8d9ed-win-arm64.exe
+    InstallerSha256: 48EDF3ADB22A9E4E560A8ACB7C100C1146062DEB66E1DFC8446C58B1A035C5BC
+  - Architecture: x64
+    InstallerUrl: https://assets.jojo.dev.br/jambor/launcher/installers/beta/0.4.1/c63cda48ec858d28a186dd9fa5aaa00d67f8d9ed/jambor-0.4.1-c63cda48ec858d28a186dd9fa5aaa00d67f8d9ed-win-x64.exe
+    InstallerSha256: EC1CAEDF4F2CBDAB0DE1AE3A0B6183BD4D2D51B878620561549C5BD12CF5A3FD
+ManifestType: installer
+ManifestVersion: 1.6.0
