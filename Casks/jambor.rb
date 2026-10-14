@@ -9,7 +9,6 @@ cask "jambor" do
 
   depends_on arch: :arm64
   depends_on macos: :sonoma
-  conflicts_with cask: "jambor-beta"
   auto_updates true
 
   app "Jambor.app"
